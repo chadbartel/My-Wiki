@@ -4,9 +4,9 @@ This is the root wiki page for SSH.
 
 ## Table of Contents
 
- 1. [Auto-Start SSH Agent in Bash](Auto-Start-SSH-Agent-in-Bash)
+ 1. [Auto-Start SSH Agent in Bash](#auto-start-ssh-agent-in-bash)
 
-### 1. Auto-Start SSH Agent in Bash
+### Auto-Start SSH Agent in Bash
 
 This should only prompt for a password the first time you login after each reboot. It will keep reusing the same `ssh-agent` as long as it stays running. This solution was copied from [this StackExchange question](https://unix.stackexchange.com/questions/90853/how-can-i-run-ssh-add-automatically-without-a-password-prompt).
 
