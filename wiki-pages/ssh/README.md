@@ -5,7 +5,6 @@ This is the root wiki page for SSH.
 ## Table of Contents
 
  1. [Auto-Start SSH Agent in Bash](#auto-start-ssh-agent-in-bash)
- 2. [Dynamically Prompt for SSH Key Password](#dynamically-prompt-for-ssh-key-password)
 
 ### Auto-Start SSH Agent in Bash
 
@@ -32,9 +31,7 @@ This should only prompt for a password the first time you login after each reboo
 
     * This should only be necessary if you have a private key file that isn't named something like `id_rsa` or `id_ed25519`.
 
-### Dynamically Prompt for SSH Key Password
-
-This solution will ensure that the `ssh-agent` will use the key you specify only when you call the SSH service, not when you open bash or login. This was copied from [this Stack Overflow question](https://stackoverflow.com/questions/52423626/remember-git-passphrase-in-wsl).
+Alternatively, you can install `keychain` and simply add the keys to your keychain. This solution will ensure that the `ssh-agent` will use the key you specify only when you call the SSH service, not when you open bash or login. This was copied from [this Stack Overflow question](https://stackoverflow.com/questions/52423626/remember-git-passphrase-in-wsl).
 
  1. Install `keychain`:
 
