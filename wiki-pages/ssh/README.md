@@ -37,7 +37,8 @@ Alternatively, you can install `keychain` and simply add the keys to your keycha
  1. Install `keychain`:
 
     ```bash
-        sudo apt install keychain
+        sudo apt-get update
+        sudo apt-get install keychain
     ```
 
  2. Find your hostname in the terminal:
@@ -54,3 +55,5 @@ Alternatively, you can install `keychain` and simply add the keys to your keycha
     ```
 
     * Yes, suffix the hostname with `-sh`.
+
+Further information on how to use `keychain` can be found [here](https://www.cyberciti.biz/faq/ssh-passwordless-login-with-keychain-for-scripts/).
