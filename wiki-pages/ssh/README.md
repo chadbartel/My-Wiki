@@ -4,7 +4,8 @@ This is the root wiki page for SSH.
 
 ## Table of Contents
 
- 1. [Auto-Start SSH Agent in Bash](#auto-start-ssh-agent-in-bash)
+* [Return to the main page...](../../README.md)
+* [Auto-Start SSH Agent in Bash](#auto-start-ssh-agent-in-bash)
 
 ### Auto-Start SSH Agent in Bash
 
