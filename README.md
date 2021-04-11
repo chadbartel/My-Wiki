@@ -7,3 +7,4 @@ This is my personal wiki for me to keep track of the stuff I learn pertaining to
 * [SSH](./wiki-pages/ssh/README.md)
 * [Python](./wiki-pages/ssh/README.md)
 * [WSL](./wiki-pages/wsl/README.md)
+* [Terraform](./wiki-pages/terraform/README.md)
