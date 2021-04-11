@@ -4,5 +4,6 @@ This is my personal wiki for me to keep track of the stuff I learn pertaining to
 
 ## Table of Contents
 
-1. [SSH](./wiki-pages/ssh/README.md)
-2. [Python](./wiki-pages/ssh/README.md)
+* [SSH](./wiki-pages/ssh/README.md)
+* [Python](./wiki-pages/ssh/README.md)
+* [WSL](./wiki-pages/wsl/README.md)
