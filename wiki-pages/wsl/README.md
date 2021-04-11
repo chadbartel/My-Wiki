@@ -5,7 +5,14 @@ This is the root wiki page for WSL (Windows Subsystem for Linux).
 ## Table of Contents
 
 * [Return to the main page...](../../README.md)
+* [Summary](#summary)
 * [Install WSL on Windows 10](#install-wsl-on-windows-10)
+
+### Summary
+
+From [Wikipedia](https://en.wikipedia.org/wiki/Windows_Subsystem_for_Linux):
+
+> **Windows Subsystem for Linux** (WSL) is a compatibility layer for running Linux binary executables (in ELF format) natively on Windows 10 and Windows Server 2019. \[...\] The first release of WSL provides a Linux-compatible kernel interface developed by Microsoft, containing no Linux kernel code, which can then run a GNU user space on top of it, such as that of Ubuntu, openSUSE, SUSE Linux Enterprise Server, Debian and Kali Linux.
 
 ### Install WSL on Windows 10
 

@@ -5,7 +5,14 @@ This is the root wiki page for SSH.
 ## Table of Contents
 
 * [Return to the main page...](../../README.md)
+* [Summary](#summary)
 * [Auto-Start SSH Agent in Bash](#auto-start-ssh-agent-in-bash)
+
+### Summary
+
+From [Wikipedia](https://en.wikipedia.org/wiki/Secure_Shell_Protocol):
+
+> **SSH** (secure shell protocol) is a cryptographic network protocol for operating network services securely over an unsecured network. Typical applications include remote command-line, login, and remote command execution, but any network service can be secured with SSH.
 
 ### Auto-Start SSH Agent in Bash
 
