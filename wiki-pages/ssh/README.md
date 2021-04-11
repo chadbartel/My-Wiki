@@ -7,6 +7,7 @@ This is the root wiki page for SSH.
 * [Return to the main page...](../../README.md)
 * [Summary](#summary)
 * [Auto-Start SSH Agent in Bash](#auto-start-ssh-agent-in-bash)
+* [Add SSH to GitHub](#add-ssh-to-github)
 
 ### Summary
 
@@ -64,3 +65,62 @@ Alternatively, you can install `keychain` and simply add the keys to your keycha
     * Yes, suffix the hostname with `-sh`.
 
 Further information on how to use `keychain` can be found [here](https://www.cyberciti.biz/faq/ssh-passwordless-login-with-keychain-for-scripts/).
+
+### Add SSH to GitHub
+
+In order to control your repositories on GitHub using SSH, follow the steps below, or review the official documentation [here](https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh):
+
+1. Open Git Bash and check to see if you have an existing key:
+
+    ```bash
+        ls -al ~/.ssh
+    ```
+
+    * The default filenames for these keys are one of the following:
+        * *id_rsa.pub*
+        * *id_ecdsa.pub*
+        * *id_ed25519.pub*
+
+2. If you don't have a key or wish to create a new one anyways, create a new key associated with your GitHub account email address:
+
+    ```bash
+        ssh-keygen -t ed25519 -C "your_email@example.com"
+    ```
+
+3. Press "Enter" to accept the default file name and location.
+
+4. When prompted, enter a password for your SSH key.
+
+5. Start the `ssh-agent` in the background:
+
+    ```bash
+        eval "$(ssh-agent -s)"
+    ```
+
+6. Add your SSH *private* key to the `ssh-agent`:
+
+    ```bash
+        ssh-add ~/.ssh/id_ed25519
+    ```
+
+7. Copy your SSH *public* key to your clipboard.
+
+8. Go to GitHub.com, login, and navigate to **Settings**.
+
+9. On the left-hand sidebar, click **SSH and GPG keys**.
+
+10. Click **New SSH key**.
+
+11. Provide a descriptive title in the "Title" field.
+
+12. Paste the key you copied to your clipboard into the "Key" field.
+
+13. Click "Add SSH key**.
+
+14. If prompted, confirm your GitHub password.
+
+15. Test your SSH key with the following command:
+
+    ```bash
+        ssh -T git@github.com
+    ```
