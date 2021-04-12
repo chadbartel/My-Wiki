@@ -115,7 +115,7 @@ In order to control your repositories on GitHub using SSH, follow the steps belo
 
 12. Paste the key you copied to your clipboard into the "Key" field.
 
-13. Click "Add SSH key**.
+13. Click "Add SSH key".
 
 14. If prompted, confirm your GitHub password.
 
