@@ -1,4 +1,4 @@
-# Python
+# AWS
 
 This is the root wiki page for AWS (Amazon Web Services).
 

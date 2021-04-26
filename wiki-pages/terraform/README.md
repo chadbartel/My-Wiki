@@ -1,4 +1,4 @@
-# WSL
+# Terraform
 
 This is the root wiki page for Terraform.
 
