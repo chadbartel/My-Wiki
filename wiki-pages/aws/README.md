@@ -8,6 +8,7 @@ This is the root wiki page for AWS (Amazon Web Services).
 * [Summary](#summary)
 * [Installing AWS CLI version 2 on Linux](#installing-aws-cli-version-2-on-linux)
 * [Using the official AWS CLI version 2 Docker image](#using-the-official-aws-cli-version-2-docker-image)
+* [Configuring AWS SSO](#configuring-aws-sso)
 
 ### Summary
 
@@ -107,3 +108,41 @@ Finally, you can even *alias* the command as `aws` in your terminal to avoid hav
 ```
 
 Now, using the alias, it's practically indistinguishable from having it installed on your system!
+
+### Configuring AWS SSO
+
+Once you have AWS CLI version 2 installed on your system you'll be able to take advantage of using SSO with the CLI. The steps below walk you through the process of configuring an AWS profile with SSO enabled.
+
+You can configure an AWS profile with SSO enabled either automatically or manually.
+
+#### Automatic Configuration
+
+1. Run the following command.
+
+    ```bash
+        aws configure sso
+    ```
+
+    *  When prompted, provide your AWS SSO start URL and the host region of the AWS SSO directory.
+
+2. The AWS CLI will open your default browser and prompt you to log in.
+
+3. After you log in, you will be prompted to select an account based on your start URL and region.
+
+4. Once you select an account, you will be prompted to select a role.
+
+5. You will need to provide the default region, output format, and profile name for the selected account and role.
+
+6. You can verify everything was configured correctly by executing each of the following commands:
+
+    ```bash
+        aws sso login --profile your-sso-profile-name
+
+        aws s3 ls --profile your-sso-profile-name
+    ```
+
+    * Substitute out `your-sso-profile-name` with the name of the SSO profile you made in step 5.
+
+    Alternatively, execute `cat ~/.aws/config` and verify your new profile is in the terminal output.
+
+Once you set up an SSO profile, you can use all AWS CLI commands as you usally would in a terminal as long as you include `--profile your-sso-profile-name`.
