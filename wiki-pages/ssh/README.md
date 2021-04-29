@@ -8,6 +8,7 @@ This is the root wiki page for SSH.
 * [Summary](#summary)
 * [Auto-Start SSH Agent in Bash](#auto-start-ssh-agent-in-bash)
 * [Add SSH to GitHub](#add-ssh-to-github)
+* [Create SSH key for EC2](#create-ssh-key-for-ec2)
 
 ### Summary
 
@@ -123,4 +124,42 @@ In order to control your repositories on GitHub using SSH, follow the steps belo
 
     ```bash
         ssh -T git@github.com
+    ```
+
+### Create SSH key for EC2
+
+To create an SSH key for use with EC2 instances, they need to meet specific requirements. The following guide is adapted from the official AWS documentation found [here](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html). Additionally, you can read the official SSH documentation on `ssh-keygen` [here](https://www.ssh.com/academy/ssh/keygen).
+
+**Requirements**:
+
+* OpenSSH public key format (the format in ~/.ssh/authorized_keys). If you connect using SSH while using the EC2 Instance Connect API, the SSH2 format is also supported.
+
+* Base64 encoded DER format
+
+* SSH public key file format as specified in RFC4716
+
+* SSH private key file format must be PEM
+
+* Algorithm must be RSA
+
+* The supported lengths are 1024, 2048, and 4096. If you connect using SSH while using the EC2 Instance Connect API, the supported lengths are 2048 and 4096.
+
+1. Generate an SSH key with `ssh-keygen`:
+
+    ```bash
+        ssh-keygen -t rsa -b 4096 -m PEM
+    ```
+
+    * Note: the `-t` option allows selection of an algorithm and the `-b` option allows selection of key size.
+
+2. Save the public and private key to a local file:
+
+    * `~/.ssh/my-key-pair.pem`
+
+    * `~/.ssh/my-key-pair.pub`
+
+3. Change the permissions on your private key file such that only *you* can read it:
+
+    ```bash
+        chmod 400 ~/.ssh/my-key-pair.pem
     ```
