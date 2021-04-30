@@ -9,6 +9,7 @@ This is the root wiki page for AWS (Amazon Web Services).
 * [Installing AWS CLI version 2 on Linux](#installing-aws-cli-version-2-on-linux)
 * [Using the official AWS CLI version 2 Docker image](#using-the-official-aws-cli-version-2-docker-image)
 * [Configuring AWS SSO](#configuring-aws-sso)
+* [AWS SSO Credential Provider](#aws-sso-credential-provider)
 
 ### Summary
 
@@ -146,3 +147,25 @@ You can configure an AWS profile with SSO enabled either automatically or manual
     Alternatively, execute `cat ~/.aws/config` and verify your new profile is in the terminal output.
 
 Once you set up an SSO profile, you can use all AWS CLI commands as you usally would in a terminal as long as you include `--profile your-sso-profile-name`.
+
+### AWS SSO Credential Provider
+
+Sometimes, logging into AWS SSO using `aws sso login --profile my-sso-profile` isn't sufficient for certain applications. For example, you may need to provide an access key, secret access key, and session token. The [**aws-sso-credential-provider**](https://github.com/kcerdena/aws_sso) solves this problem by fetching your AWS SSO profile credentials using [STS](https://docs.aws.amazon.com/STS/latest/APIReference/welcome.html).
+
+Follow the steps below to install **aws-sso-credential-provider**.
+
+1. Install AWS CLI version 2.
+
+2. Configure at least *one* named SSO profile.
+
+3. Use `pip` to install **aws-sso-credential-provider**:
+
+    ```bash
+        pip install aws-sso-credential-provider
+    ```
+
+4. Run the credential provider using Python:
+
+    ```bash
+        python3 -m aws_sso -p SSO_PROFILE
+    ```
