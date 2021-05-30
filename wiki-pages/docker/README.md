@@ -9,6 +9,7 @@ This is the root wiki page for Docker.
 * [Installing Docker Desktop](#installing-docker-desktop)
 * [Installing Docker Engine on Ubuntu](#installing-docker-engine-on-ubuntu)
 * [Running Docker without sudo](#running-docker-without-sudo)
+* [WSL cannot connect to the Docker daemon error](#wsl-cannot-connect-to-the-docker-daemon-error)
 
 ### Summary
 
@@ -99,3 +100,24 @@ If you don't want to constantly include `sudo` in your calls to `docker`, then f
     ```bash
         docker run hello-world
     ```
+
+### WSL cannot connect to the Docker daemon error
+
+Have you ever been running in WSL2 and encountered this error?
+
+```bash
+    docker: Cannot connect to the Docker daemon at unix:///var/run/docker.sock. Is the docker daemon running?.
+```
+
+You're not alone! This is apparently a common issue with WSL2 and Docker. You'll look online for an answer and a lot of people will tell you to use `systemctl`. However, this *also* won't work because you're using WSL2. So, what do we do?
+
+**Gigantic** thanks to [JERRY](https://stackoverflow.com/users/3312462/jerry) on [this StackOverflow question](https://stackoverflow.com/questions/20680050/how-do-i-install-chkconfig-on-ubuntu) which I was lead to from [this article on LinuxHandbook.com](https://linuxhandbook.com/system-has-not-been-booted-with-systemd/). The table below will show you the ***revised*** equivalents from the table found in the [LinuxHandbook.com](LinuxHandbook.com) article.
+
+| **Systemd command** | **Sysvinit command** |
+|---|---|
+| `systemctl start service_name` | `service service_name start` |
+| `systemctl stop service_name` | `service service_name stop` |
+| `systemctl restart service_name` | `service service_name restart` |
+| `systemctl status service_name` | `service service_name status` |
+| `systemctl enable service_name` | `update-rc.d service_name enable` |
+| `systemctl disable service_name` | `update-rc.d service_name disable` |
