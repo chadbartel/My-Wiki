@@ -291,7 +291,7 @@ The following steps should recreate the exact local Kubernetes setup I have on m
 
     ```bash
         #!/bin/bash
-        sudo "/mnt/c/Program Files/Kubernetes/Minikube/minikube.exe" $@
+        "/mnt/c/Program Files/Kubernetes/Minikube/minikube.exe" $@
     ```
 
     * Or the path wherever minikube was installed.
