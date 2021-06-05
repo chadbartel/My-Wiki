@@ -124,7 +124,7 @@ You can configure an AWS profile with SSO enabled either automatically or manual
         aws configure sso
     ```
 
-    *  When prompted, provide your AWS SSO start URL and the host region of the AWS SSO directory.
+    * When prompted, provide your AWS SSO start URL and the host region of the AWS SSO directory.
 
 2. The AWS CLI will open your default browser and prompt you to log in.
 
@@ -169,3 +169,25 @@ Follow the steps below to install **aws-sso-credential-provider**.
     ```bash
         python3 -m aws_sso -p SSO_PROFILE
     ```
+
+### Get SSO Profile Credentials Using STS
+
+Thanks to the response from Rolando Cintron on [this](https://stackoverflow.com/questions/55128348/execute-terraform-apply-with-aws-assume-role) Stack Overflow question, here is a "bulletproof" way to get credentials from an AWS profile:
+
+```bash
+    aws_credentials=$(aws sts assume-role --role-arn arn:aws:iam::1234567890:role/nameOfMyrole --role-session-name "RoleSession1")
+
+    export AWS_ACCESS_KEY_ID=$(echo $aws_credentials|jq '.Credentials.AccessKeyId'|tr -d '"')
+    export AWS_SECRET_ACCESS_KEY=$(echo $aws_credentials|jq '.Credentials.SecretAccessKey'|tr -d '"')
+    export AWS_SESSION_TOKEN=$(echo $aws_credentials|jq '.Credentials.SessionToken'|tr -d '"')
+```
+
+As a practical example, you could use this solution to test a Docker container that will be assuming an role in AWS but can only test locally:
+
+```bash
+    docker run \
+        -e AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID \
+        -e AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY \
+        -e AWS_SESSION_TOKEN=$AWS_SESSION_TOKEN \
+        myimage
+```
