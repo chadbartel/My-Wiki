@@ -10,6 +10,7 @@ This is the root wiki page for Docker.
 * [Installing Docker Engine on Ubuntu](#installing-docker-engine-on-ubuntu)
 * [Running Docker without sudo](#running-docker-without-sudo)
 * [WSL cannot connect to the Docker daemon error](#wsl-cannot-connect-to-the-docker-daemon-error)
+* [Docker Daemon Socket Connect Permissions Denied](#docker-daemon-socket-connect-permission-denied)
 
 ### Summary
 
@@ -121,3 +122,30 @@ You're not alone! This is apparently a common issue with WSL2 and Docker. You'll
 | `systemctl status service_name` | `service service_name status` |
 | `systemctl enable service_name` | `update-rc.d service_name enable` |
 | `systemctl disable service_name` | `update-rc.d service_name disable` |
+
+### Docker Daemon Socket Connect Permissions Denied
+
+I ran into this problem when trying to configure my local Jenkins Docker container to use my local Docker network, `jenkins`. I set up my Jenkins server by following the official documentation on how to do this [here](https://www.jenkins.io/doc/book/installing/docker/).
+
+1. Attach a volume, `--volume /var/run/docker.sock:/var/run/docker.sock`, *before* running your **custom** `myjenkins-blueocean:1.1` Docker image ([Thanks Ethan!](https://serverfault.com/questions/1037065/docker-in-docker-for-gitlab-client-sent-an-http-request-to-https-server-faile)).
+
+2. Change the ownership of the `~/.docker/` directory using the following commands:
+
+    ```bash
+        sudo chown "$USER":"$USER" /home/"$USER"/.docker -R
+        sudo chmod g+rwx "$HOME/.docker" -R
+    ```
+
+3. Change the permission of `/var/run/docker.sock` such that all userse can read and write but cannot execute the file or folder ([Thanks sagarjethi!](https://www.digitalocean.com/community/questions/how-to-fix-docker-got-permission-denied-while-trying-to-connect-to-the-docker-daemon-socket)):
+
+    ```bash
+        sudo chmod 666 /var/run/docker.sock
+    ```
+
+4. Restart the `myjenkins-blueocean` Docker container.
+
+5. Open a browser to your Jenkins console, `http://localhost:8080`, go to **Manage Jenkins**, then **Manage Nodes and Clouds**, and select **Configure Clouds**.
+
+6. Add a new **Docker** cloud, give the cloud a name, and enter `unix:///var/run/docker.sock` as the **Docker Host URI**.
+
+7. Click **Test Connection** to confirm it works and that's it!
